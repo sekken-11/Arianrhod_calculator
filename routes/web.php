@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TribeController;
+use App\Http\Controllers\MainClassController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\AdminMiddleware;
@@ -37,6 +39,10 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::resource('tribe', TribeController::class);
+});
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::resource('main_class', MainClassController::class);
 });
 
 require __DIR__.'/auth.php';

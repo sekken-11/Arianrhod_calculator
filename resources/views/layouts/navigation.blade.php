@@ -54,7 +54,7 @@
                             <x-dropdown-link :href="route('admin.tribe.index')">
                                 種族
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('admin.main_class.index')">
                                 メインクラス
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">

@@ -61,7 +61,7 @@
                                     <div class="flex flex-wrap">
                                         <div class="w-full sm:w-1/2 px-2 mb-4">
                                             <div class="my-2">
-                                                <label for="namental_base" class="font-bold mb-1">{{ __('精神') }}</label>
+                                                <label for="mental_base" class="font-bold mb-1">{{ __('精神') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white" name="mental_base" id="mental_base">
                                             </div>
                                         </div>
