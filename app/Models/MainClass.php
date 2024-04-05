@@ -9,6 +9,19 @@ class MainClass extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'strength_correction',
+        'dexterity_correction',
+        'agility_correction',
+        'intelligence_correction',
+        'sense_correction',
+        'mental_correction',
+        'luck_correction',
+        'hp_correction',
+        'mp_correction',
+    ];
+
     public function characters() {
         return $this->belongsToMany(Character::class)->withTimestamps();
     }
