@@ -57,8 +57,8 @@
                             <x-dropdown-link :href="route('admin.main_class.index')">
                                 メインクラス
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">
-                                サブクラス
+                            <x-dropdown-link :href="route('admin.support_class.index')">
+                                サポートクラス
                             </x-dropdown-link>
                         @endif
                     </x-slot>
