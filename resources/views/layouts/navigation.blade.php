@@ -48,6 +48,19 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+
+                        <!-- Admin User -->
+                        @if(auth()->check() && auth()->user()->level == "admin")
+                            <x-dropdown-link :href="route('admin.tribe.index')">
+                                種族
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                メインクラス
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                サブクラス
+                            </x-dropdown-link>
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>
