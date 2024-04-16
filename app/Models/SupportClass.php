@@ -23,6 +23,6 @@ class SupportClass extends Model
     ];
 
     public function characters() {
-        return $this->belongsToMany(Character::class)->withTimestamps();
+        return $this->hasMany(Character::class);
     }
 }

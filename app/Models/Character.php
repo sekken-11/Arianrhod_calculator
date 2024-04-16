@@ -14,13 +14,13 @@ class Character extends Model
     ]
 
     public function tribes() {
-        return $this->belongsToMany(Tribe::class)->withTimestamps();
+        return $this->belongsTo(Tribe::class);
     }
     public function main_classes() {
-        return $this->belongsToMany(MainClass::class)->withTimestamps();
+        return $this->belongsTo(MainClass::class);
     }
     public function support_classes() {
-        return $this->belongsToMany(SupportClass::class)->withTimestamps();
+        return $this->belongsTo(SupportClass::class);
     }
     public function skills() {
         return $this->belongsToMany(Skill::class)->withTimestamps();

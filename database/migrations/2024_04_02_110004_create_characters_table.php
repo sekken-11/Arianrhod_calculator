@@ -28,12 +28,27 @@ return new class extends Migration
             $table->string('hair_color')->nullable();
             $table->string('eye_color')->nullable();
             $table->string('skin_color')->nullable();
-            $table->integer('hp');
-            $table->integer('mp');
+
+            $table->integer('present_hp');
+            $table->integer('hp_correction');
+            $table->integer('present_mp');
+            $table->integer('mp_correction');
             $table->integer('fate');
+            $table->integer('fate_correction');
+            $table->integer('fate_limit_correction');
+
+            $table->integer('weapon_weight_correction');
+            $table->integer('armor_weight_correction');
+            $table->integer('item_weight_correction');
+
+            $table->string('hometown')->nullable();
             $table->string('origins')->nullable();
             $table->string('environment')->nullable();
             $table->string('purpose')->nullable();
+            $table->string('origins_remarks')->nullable();
+            $table->string('environment_remarks')->nullable();
+            $table->string('purpose_remarks')->nullable();
+
             $table->integer('money')->default(0);
             $table->string('initial_main_class');
             $table->string('initial_support_class');
@@ -53,6 +68,10 @@ return new class extends Migration
             $table->integer('sense_correction_second')->default(0);
             $table->integer('mental_correction_second')->default(0);
             $table->integer('luck_correction_second')->default(0);
+
+            $table->foreignId('tribe_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('main_class_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('support_class_id')->nullable()->constrained()->nullOnDelete();
 
             $table->timestamps();
         });
