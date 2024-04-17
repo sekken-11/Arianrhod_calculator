@@ -22,7 +22,7 @@ class CharaSheetController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $characters = $user->characters()->with('tribe', 'main_class', 'support_class')->get();
+        $characters = $user->characters()->with('tribe','main_class', 'support_class', 'skills', 'equippings')->get();
         return view('charasheet.index', compact('characters'));
     }
 

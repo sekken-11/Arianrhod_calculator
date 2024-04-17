@@ -171,6 +171,7 @@ class CharacterRequest extends FormRequest
 
             'equippings' => ['nullable', 'array', 'max:6'],
             'equippings.*.name' => ['required_if:equippings,array', 'string', 'max:255'],
+            'equippings.*.type' => ['required_if:equippings,array', 'string', 'max:255'],
             'equippings.*.weight' => ['nullable', 'numeric'],
             'equippings.*.accuracy_correction' => ['nullable', 'numeric'],
             'equippings.*.power' => ['nullable', 'numeric'],
