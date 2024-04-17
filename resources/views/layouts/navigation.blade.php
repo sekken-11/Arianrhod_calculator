@@ -37,6 +37,9 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('charasheet.index')">
+                            {{ __('キャラクター') }}
+                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -52,13 +55,13 @@
                         <!-- Admin User -->
                         @if(auth()->check() && auth()->user()->level == "admin")
                             <x-dropdown-link :href="route('admin.tribe.index')">
-                                種族
+                                {{ __('種族') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('admin.main_class.index')">
-                                メインクラス
+                                {{ __('メインクラス') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('admin.support_class.index')">
-                                サポートクラス
+                                {{ __('サポートクラス') }}
                             </x-dropdown-link>
                         @endif
                     </x-slot>

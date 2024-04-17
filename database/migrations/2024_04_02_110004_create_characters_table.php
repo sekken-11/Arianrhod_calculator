@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('age');
-            $table->enum('gender', ['男性', '女性', 'その他']);
+            $table->string('player_name')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('gender')->nullable();
             $table->integer('level')->default(1);
             $table->integer('strength_bonus')->default(0);
             $table->integer('dexterity_bonus')->default(0);
@@ -28,13 +29,25 @@ return new class extends Migration
             $table->string('hair_color')->nullable();
             $table->string('eye_color')->nullable();
             $table->string('skin_color')->nullable();
-            $table->integer('hp');
-            $table->integer('mp');
-            $table->integer('fate');
+
+            $table->integer('hp_correction');
+            $table->integer('mp_correction');
+            $table->integer('fate_correction');
+            $table->integer('fate_limit_correction');
+
+            $table->integer('weapon_weight_correction');
+            $table->integer('armor_weight_correction');
+            $table->integer('item_weight_correction');
+
+            $table->string('hometown')->nullable();
             $table->string('origins')->nullable();
             $table->string('environment')->nullable();
             $table->string('purpose')->nullable();
-            $table->integer('money')->default(0);
+            $table->string('origins_remarks')->nullable();
+            $table->string('environment_remarks')->nullable();
+            $table->string('purpose_remarks')->nullable();
+
+            $table->integer('money')->nullable()->default(0);
             $table->string('initial_main_class');
             $table->string('initial_support_class');
 
@@ -53,6 +66,11 @@ return new class extends Migration
             $table->integer('sense_correction_second')->default(0);
             $table->integer('mental_correction_second')->default(0);
             $table->integer('luck_correction_second')->default(0);
+
+            $table->foreignId('tribe_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('main_class_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('support_class_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeDelete();
 
             $table->timestamps();
         });
