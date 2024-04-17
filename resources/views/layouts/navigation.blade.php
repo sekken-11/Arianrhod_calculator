@@ -37,7 +37,7 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('charasheet.create')">
+                        <x-dropdown-link :href="route('charasheet.index')">
                             {{ __('キャラクター') }}
                         </x-dropdown-link>
 

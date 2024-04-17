@@ -139,6 +139,13 @@
                                                  name="purpose_remarks" id="purpose_remarks" placeholder="備考"></textarea>
                                             </div>
                                         </div>
+                                        <div class="w-full w-1/3 px-2">
+                                            <div class="mt-2 mb-1">
+                                                <label for="hometown" class="font-bold mb-1">{{ __('出身地') }}</label>
+                                                <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
+                                                 name="hometown" id="hometown">
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- 種族・クラス -->
@@ -147,7 +154,7 @@
                                             <div class="my-2">
                                                 <label for="tribe" class="font-bold mb-1">{{ __('種族') }}</label>
                                                 <select class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
-                                                 name="tribe" id="tribe">
+                                                 name="tribe_id" id="tribe">
                                                     <option value="">選択してください</option>
                                                 @foreach($tribes as $tribe)
                                                     <option value="{{ $tribe->id }}">{{ $tribe->name }}</option>
@@ -159,7 +166,7 @@
                                             <div class="my-2">
                                                 <label for="main_class" class="font-bold mb-1">{{ __('メインクラス') }}</label>
                                                 <select class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
-                                                 name="main_class" id="main_class">
+                                                 name="main_class_id" id="main_class">
                                                     <option value="">選択してください</option>
                                                 @foreach($main_classes as $main_class)
                                                     <option value="{{ $main_class->id }}">{{ $main_class->name }}</option>
@@ -171,7 +178,7 @@
                                             <div class="my-2">
                                                 <label for="support_class" class="font-bold mb-1">{{ __('サポートクラス') }}</label>
                                                 <select class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
-                                                 name="tsupport_classribe" id="support_class">
+                                                 name="support_class_id" id="support_class">
                                                     <option value="">選択してください</option>
                                                 @foreach($support_classes as $support_class)
                                                     <option value="{{ $support_class->id }}">{{ $support_class->name }}</option>
@@ -289,7 +296,7 @@
 
                                     @include('charasheet.parts.skill')
 
-                                    @include('charasheet.parts.equipment')
+                                    @include('charasheet.parts.equipping')
 
                                 <div class="d-flex justify-content-between pt-3">
                                     <div class="flex justify-center">
@@ -372,10 +379,12 @@ function updateStatusValues(event, classData, classType) {
     }
 
     var weightElements = {!! json_encode($weight_limit) !!};
-    weightElements.forEach(function(status) {
-        var tribeElement = document.getElementById(status.en + '_' + classType);
-            tribeElement.textContent = selectedClass ? selectedClass['weight_limit'] : '-';
-    });
+    if (classType == 'base') {
+        weightElements.forEach(function(status) {
+            var tribeElement = document.getElementById(status.en + '_' + classType);
+                tribeElement.textContent = selectedClass ? selectedClass['weight_limit'] : '-';
+        });
+    }
 }
 // フェイトセット関数
 function setOtherTextToTwo() {

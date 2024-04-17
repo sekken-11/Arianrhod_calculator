@@ -25,66 +25,69 @@
                 <th class="py-3 text-center">射程</th>
             </tr>
         </thead>
-        @foreach (['右手', '左手', '頭部', '胴部', '補助防具', '装身具'] as $index => $equipment)
+        @foreach (['右手', '左手', '頭部', '胴部', '補助防具', '装身具'] as $index => $equipping)
             <tbody class="equips text-gray-600 text-xs font-light hover:bg-gray-200">
                 <tr class="border-t border-gray-300">
-                    <td class="equip_type p-1 pt-2 text-center">{{ $equipment }}</td>
+                    <td class="equip_type p-1 pt-2 text-center">
+                        {{ $equipping }}
+                        <input type="hidden" name="equippings[{{ $index }}][type]" value="{{ $equipping }}">
+                    </td>
                     <td class="p-1 pt-2 text-center" id="equip_name">
-                        <input type="number"
+                        <input type="text"
                          class="equip_name num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][name]" placeholder="装備品名">
+                         name="equippings[{{ $index }}][name]" placeholder="装備品名">
                     </td>
                     <td class="p-1 pt-2 text-center" id="{{ $index < 2 ? 'weapon_weight' : 'armor_weight' }}">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][weight]">
+                         name="equippings[{{ $index }}][weight]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_accuracy">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][accuracy_correction]">
+                         name="equippings[{{ $index }}][accuracy_correction]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_power">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][power]">
+                         name="equippings[{{ $index }}][power]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_avoid">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][avoid_correction]">
+                         name="equippings[{{ $index }}][avoid_correction]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_physical_defense">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][physical_defense]">
+                         name="equippings[{{ $index }}][physical_defense]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_magic_defense">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][magic_defense]">
+                         name="equippings[{{ $index }}][magic_defense]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_action">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][action_correction]">
+                         name="equippings[{{ $index }}][action_correction]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_move">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][move_correction]">
+                         name="equippings[{{ $index }}][move_correction]">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_range">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equipments[][range]">
+                         name="equippings[{{ $index }}][range]">
                     </td>
                     <tr>
                         <td class="px-1 pb-2 text-center" colspan="1"></td>
                         <td class="px-1 pb-2 text-center" colspan="10" id="equip_remarks">
                             <textarea rows="1"
                              class="equip_remarks border border-gray-300 rounded focus:outline-none focus:bg-white"
-                             name="equipments[][remarks]" placeholder="備考"></textarea>
+                             name="equippings[{{ $index }}][remarks]" placeholder="備考"></textarea>
                         </td>
                     </tr>
                 </tr>

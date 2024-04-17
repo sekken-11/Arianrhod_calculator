@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('level')->default(1);
-            $table->enum('timing', ['効果参照', '判定直前', 'メジャー', 'マイナー', 'パッシブ', 'アイテム']);
+            $table->string('timing')->nullable();
             $table->string('judge')->nullable();
             $table->string('target')->nullable();
             $table->string('range')->nullable();

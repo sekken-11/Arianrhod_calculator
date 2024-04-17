@@ -9,7 +9,19 @@ class Skill extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 
+        'level', 
+        'timing', 
+        'judge',
+        'target',
+        'range',
+        'cost',
+        'level_limit',
+        'effect'
+    ];
+
     public function characters() {
-        return $this->belongsToMany(Character::class)->withTimestamps();
+        return $this->belongsToMany(Character::class, 'character_skill')->withTimestamps();
     }
 }

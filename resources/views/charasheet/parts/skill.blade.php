@@ -30,48 +30,48 @@
                 <td class="p-1 pt-2 text-center">
                     <input type="text"
                      class="skill_name border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][name]" placeholder="スキル名">
+                     name="skills[0][name]" placeholder="スキル名">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="number"
                      class="skill_level num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][level]" min="0">
+                     name="skills[0][level]" min="0">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="text"
                      class="skill_timing border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][timing]">
+                     name="skills[0][timing]">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="text"
                      class="skill_judge border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][judge]">
+                     name="skills[0][judge]">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="text"
                      class="skill_target border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][target]">
+                     name="skills[0][target]">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="text"
                      class="skill_range num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][range]">
+                     name="skills[0][range]">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="number"
                      class="skill_cost num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][cost]">
+                     name="skills[0][cost]">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="number"
                      class="skill_level_limit num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                     name="skills[][level_limit]">
+                     name="skills[0][level_limit]">
                 </td>
                 <tr>
                     <td class="px-1 pb-2 text-center" colspan="7">
                         <textarea rows="1"
                          class="skill_effect border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="skills[][effect]" placeholder="効果詳細"></textarea>
+                         name="skills[0][effect]" placeholder="効果詳細"></textarea>
                     </td>
                     <td class="px-1 pb-2 text-center" colspan="1">
                         <button type="button" onclick="removeSkillField(this)">削除</button>
@@ -80,7 +80,6 @@
             </tr>
         </tbody>
     </table>
-
 </div>
 
 <style>
@@ -106,6 +105,9 @@
 .skill_target {
     width: 60px !important;
 }
+.skill_range {
+    width: 60px !important;
+}
 .skill_effect {
     width: 100% !important;
 }
@@ -121,6 +123,16 @@ function addSkillField() {
     var skillsContainer = document.querySelector('.min-w-max.w-full.table-auto.skills');
     var newRow = skillRow.cloneNode(true);
     skillsContainer.append(newRow);
+
+    var skillsColumnName = ['name', 'level', 'timing', 'judge', 'target', 'range', 'cost', 'level_limit', 'effect'];
+    var skillRows = document.querySelectorAll('.text-gray-600.text-xs.font-light.skills');
+    skillRows.forEach((skill, skillIndex) => {
+        var inputs = skill.querySelectorAll('input, textarea');
+
+        inputs.forEach((input, inputIndex) => {
+            input.setAttribute('name', `skills[${skillIndex}][${skillsColumnName[inputIndex]}]`);
+        });
+    });
 }
 
 function removeSkillField(button) {

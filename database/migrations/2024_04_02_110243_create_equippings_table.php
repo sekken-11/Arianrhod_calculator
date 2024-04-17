@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipments', function (Blueprint $table) {
+        Schema::create('equippings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('type', ['右手', '左手', '頭部', '胴部', '補助防具', '装身具']);
             $table->integer('weight')->default(0);
             $table->integer('accuracy_correction')->default(0);
             $table->integer('power')->default(0);
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipments');
+        Schema::dropIfExists('equippings');
     }
 };

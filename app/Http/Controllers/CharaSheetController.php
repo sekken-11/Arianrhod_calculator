@@ -7,8 +7,10 @@ use App\Models\Character;
 use App\Models\Tribe;
 use App\Models\MainClass;
 use App\Models\SupportClass;
+use App\Http\Requests\CharacterRequest;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CharaSheetController extends Controller
 {   
@@ -20,7 +22,7 @@ class CharaSheetController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $characters = $user->characters;
+        $characters = $user->characters()->with('tribe', 'main_class', 'support_class')->get();
         return view('charasheet.index', compact('characters'));
     }
 
@@ -77,39 +79,29 @@ class CharaSheetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CharacterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'strength_base' => 'required|numeric',
-            'dexterity_base' => 'required|numeric',
-            'agility_base' => 'required|numeric',
-            'intelligence_base' => 'required|numeric',
-            'sense_base' => 'required|numeric',
-            'mental_base' => 'required|numeric',
-            'luck_base' => 'required|numeric',
-            'hp_base' => 'required|numeric',
-            'mp_base' => 'required|numeric',
-            'fate_base' => 'required|numeric',
-            'weight_limit' => 'required|numeric',
-        ]);
+        $validatedData = $request->validated();
 
-        $tribe = Tribe::create($request->only([
-            'name',
-            'strength_base',
-            'dexterity_base',
-            'agility_base',
-            'intelligence_base',
-            'sense_base',
-            'mental_base',
-            'luck_base',
-            'hp_base',
-            'mp_base',
-            'fate_base',
-            'weight_limit',
-        ]));
+        DB::transaction(function () use ($validatedData) {
+            $user = Auth::user();
+            $mainClass = MainClass::find($validatedData['main_class_id']);
+            $supportClass = SupportClass::find($validatedData['support_class_id']);
+            $validatedData['initial_main_class'] = $mainClass->name;
+            $validatedData['initial_support_class'] = $supportClass->name;
+            $validatedData['level'] = 1;
+            $character = $user->characters()->create($validatedData);
 
-        return redirect()->route('admin.tribe.index')->with('success', 'Tribe created successfully.');
+            if (!empty($validatedData['skills'])) {
+                $character->skills()->createMany($validatedData['skills']);
+            }
+
+            if (!empty($validatedData['equippings'])) {
+                $character->equippings()->createMany($validatedData['equippings']);
+            }
+        });
+
+        return redirect()->route('charasheet.index')->with('success', 'Tribe created successfully.');
     }
 
     /**
@@ -120,8 +112,6 @@ class CharaSheetController extends Controller
      */
     public function show($id)
     {
-        $tribe = Tribe::findOrFail($id);
-        return view('admin.tribe.show', compact('tribe'));
     }
 
     /**
@@ -145,41 +135,6 @@ class CharaSheetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'strength_base' => 'required|numeric',
-            'dexterity_base' => 'required|numeric',
-            'agility_base' => 'required|numeric',
-            'intelligence_base' => 'required|numeric',
-            'sense_base' => 'required|numeric',
-            'mental_base' => 'required|numeric',
-            'luck_base' => 'required|numeric',
-            'hp_base' => 'required|numeric',
-            'mp_base' => 'required|numeric',
-            'fate_base' => 'required|numeric',
-            'weight_limit' => 'required|numeric',
-        ]);
-
-        $tribe = Tribe::findOrFail($id);
-        $attributes = [
-            'name', 
-            'strength_base',
-            'dexterity_base',
-            'agility_base',
-            'intelligence_base',
-            'sense_base', 'mental_base',
-            'luck_base',
-            'hp_base',
-            'mp_base',
-            'fate_base',
-            'weight_limit'
-        ];
-        foreach ($attributes as $attribute) {
-            $tribe->$attribute = $request->$attribute;
-        }
-        $tribe->save();
-
-        return redirect()->route('admin.tribe.index')->with('success', 'Tribe updated successfully.');
     }
 
     /**
@@ -190,9 +145,5 @@ class CharaSheetController extends Controller
      */
     public function destroy($id)
     {
-        $tribe = Tribe::findOrFail($id);
-        $tribe->delete();
-
-        return redirect()->route('admin.tribe.index')->with('success', 'Tribe deleted successfully.');
     }
 }

@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('age');
-            $table->enum('gender', ['男性', '女性', 'その他']);
+            $table->string('player_name')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('gender')->nullable();
             $table->integer('level')->default(1);
             $table->integer('strength_bonus')->default(0);
             $table->integer('dexterity_bonus')->default(0);
@@ -29,11 +30,8 @@ return new class extends Migration
             $table->string('eye_color')->nullable();
             $table->string('skin_color')->nullable();
 
-            $table->integer('present_hp');
             $table->integer('hp_correction');
-            $table->integer('present_mp');
             $table->integer('mp_correction');
-            $table->integer('fate');
             $table->integer('fate_correction');
             $table->integer('fate_limit_correction');
 
@@ -49,7 +47,7 @@ return new class extends Migration
             $table->string('environment_remarks')->nullable();
             $table->string('purpose_remarks')->nullable();
 
-            $table->integer('money')->default(0);
+            $table->integer('money')->nullable()->default(0);
             $table->string('initial_main_class');
             $table->string('initial_support_class');
 
@@ -72,6 +70,7 @@ return new class extends Migration
             $table->foreignId('tribe_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('main_class_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('support_class_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeDelete();
 
             $table->timestamps();
         });
