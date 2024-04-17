@@ -6,11 +6,11 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 overflow-x-auto">
 
-                    <div class="container small">
+                    <div>
                         <form action="{{ route('charasheet.store') }}" method="POST">
                         @csrf
                             <fieldset>
@@ -58,55 +58,51 @@
 
                                     <!-- キャラクター情報 -->
                                     <div class="flex flex-wrap">
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5 px-2">
                                             <div class="my-2">
                                                 <label for="age" class="font-bold mb-1">{{ __('年齢') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                                                  name="age" id="age">
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="my-2">
                                                 <label for="gender" class="font-bold mb-1">{{ __('性別') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                                                  name="gender" id="gender">
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="my-2">
                                                 <label for="height" class="font-bold mb-1">{{ __('身長') }}</label>
                                                 <input type="number" min="0" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                                                  name="height" id="height">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="flex flex-wrap">
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="my-2">
                                                 <label for="hair_color" class="font-bold mb-1">{{ __('髪の色') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                                                  name="hair_color" id="hair_color">
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="my-2">
                                                 <label for="eye_color" class="font-bold mb-1">{{ __('瞳の色') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                                                  name="eye_color" id="eye_color">
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="my-2">
                                                 <label for="skin_color" class="font-bold mb-1">{{ __('肌の色') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                                                  name="skin_color" id="skin_color">
                                             </div>
                                         </div>
-                                    </div>
 
                                     <!-- ライフパス -->
-                                    <div class="flex flex-wrap">
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="mt-2 mb-1">
                                                 <label for="origins" class="font-bold mb-1">{{ __('出自') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
@@ -117,7 +113,7 @@
                                                  name="origins_remarks" id="origins_remarks" placeholder="備考"></textarea>
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="mt-2 mb-1">
                                                 <label for="environment" class="font-bold mb-1">{{ __('境遇') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
@@ -128,7 +124,7 @@
                                                  name="environment_remarks" id="environment_remarks" placeholder="備考"></textarea>
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="mt-2 mb-1">
                                                 <label for="purpose" class="font-bold mb-1">{{ __('目的') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
@@ -139,7 +135,7 @@
                                                  name="purpose_remarks" id="purpose_remarks" placeholder="備考"></textarea>
                                             </div>
                                         </div>
-                                        <div class="w-full w-1/3 px-2">
+                                        <div class="w-full w-1/3 xl:w-1/5  px-2">
                                             <div class="mt-2 mb-1">
                                                 <label for="hometown" class="font-bold mb-1">{{ __('出身地') }}</label>
                                                 <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"

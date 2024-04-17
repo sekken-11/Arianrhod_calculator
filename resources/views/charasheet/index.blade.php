@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
         <div x-data="{ show: true }">
 
             <div class="flex justify-between">
@@ -19,7 +19,7 @@
                 </button>
             </div>
 
-            <div class="container">
+            <div>
                 <div class="bg-white shadow-md rounded my-6">
                     <table class="min-w-max w-full table-auto">
                         <thead>
