@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('luck_correction')->default(0);
             $table->integer('hp_correction');
             $table->integer('mp_correction');
+            $table->integer('hp_up');
+            $table->integer('mp_up');
             $table->timestamps();
         });
     }

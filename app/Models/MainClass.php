@@ -20,6 +20,8 @@ class MainClass extends Model
         'luck_correction',
         'hp_correction',
         'mp_correction',
+        'hp_up',
+        'mp_up',
     ];
 
     public function characters() {

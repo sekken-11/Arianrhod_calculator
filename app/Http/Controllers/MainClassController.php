@@ -47,6 +47,8 @@ class MainClassController extends Controller
             'luck_correction' => 'numeric',
             'hp_correction' => 'required|numeric',
             'mp_correction' => 'required|numeric',
+            'hp_up' => 'required|numeric',
+            'mp_up' => 'required|numeric',
         ]);
 
         $main_class = MainClass::create($request->only([
@@ -60,6 +62,8 @@ class MainClassController extends Controller
             'luck_correction',
             'hp_correction',
             'mp_correction',
+            'hp_up',
+            'mp_up',
         ]));
 
         return redirect()->route('admin.main_class.index')->with('success', 'MainClass created successfully.');
@@ -109,6 +113,8 @@ class MainClassController extends Controller
             'luck_correction' => 'numeric',
             'hp_correction' => 'required|numeric',
             'mp_correction' => 'required|numeric',
+            'hp_up' => 'required|numeric',
+            'mp_up' => 'required|numeric',
         ]);
 
         $main_class = MainClass::findOrFail($id);
@@ -123,6 +129,8 @@ class MainClassController extends Controller
             'luck_correction',
             'hp_correction',
             'mp_correction',
+            'hp_up',
+            'mp_up',
         ];
         foreach ($attributes as $attribute) {
             $main_class->$attribute = $request->$attribute;

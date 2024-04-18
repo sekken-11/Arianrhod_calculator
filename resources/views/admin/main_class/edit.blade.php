@@ -97,6 +97,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="flex flex-wrap">
+                                        <div class="w-full sm:w-1/2 px-2 mb-4">
+                                            <div class="my-2">
+                                                <label for="hp_correction" class="font-bold mb-1">{{ __('HP上昇値') }}</label>
+                                                <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
+                                                 name="hp_up" id="hp_up" value="{{ $main_class->hp_up }}">
+                                            </div>
+                                        </div>
+                                        <div class="w-full sm:w-1/2 px-2 mb-4">
+                                            <div class="my-2">
+                                                <label for="mp_correction" class="font-bold mb-1">{{ __('MP上昇値') }}</label>
+                                                <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
+                                                 name="mp_up" id="mp_up" value="{{ $main_class->mp_up }}">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="flex justify-center">
                                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-3">
                                             {{ __('更新') }}
