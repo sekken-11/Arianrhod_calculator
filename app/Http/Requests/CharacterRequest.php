@@ -72,13 +72,7 @@ class CharacterRequest extends FormRequest
             'move_correction' => 0,
             'range' => 0,
         ];
-        if ($this->has('equippings')) {
-            // 装備を取得し、nameがnullでないものだけを残す
-            $equippings = $this->input('equippings');
-            $this->merge(['equippings' => collect($equippings)->reject(function ($equipping) {
-                return is_null($equipping['name']);
-            })->values()->all()]);
-            
+        if ($this->has('equippings')) {            
             $equippings = $this->input('equippings');
             foreach ($equippings as &$equip) {
                 $equippingDefaults = [
@@ -168,9 +162,10 @@ class CharacterRequest extends FormRequest
             'skills.*.cost' => ['nullable', 'numeric'],
             'skills.*.level_limit' => ['nullable', 'numeric', 'min:1'],
             'skills.*.effect' => ['nullable', 'string'],
+            'skills.*.source' => ['nullable', 'string'],
 
             'equippings' => ['nullable', 'array', 'max:6'],
-            'equippings.*.name' => ['required_if:equippings,array', 'string', 'max:255'],
+            'equippings.*.name' => ['nullable', 'string', 'max:255'],
             'equippings.*.type' => ['required_if:equippings,array', 'string', 'max:255'],
             'equippings.*.weight' => ['nullable', 'numeric'],
             'equippings.*.accuracy_correction' => ['nullable', 'numeric'],

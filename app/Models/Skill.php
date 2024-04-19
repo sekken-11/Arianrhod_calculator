@@ -18,7 +18,8 @@ class Skill extends Model
         'range',
         'cost',
         'level_limit',
-        'effect'
+        'effect',
+        'source',
     ];
 
     public function characters() {

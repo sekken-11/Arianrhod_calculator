@@ -35,59 +35,59 @@
                     <td class="p-1 pt-2 text-center" id="equip_name">
                         <input type="text"
                          class="equip_name num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][name]" placeholder="装備品名">
+                         name="equippings[{{ $index }}][name]" placeholder="装備品名" value="{{ $character->equippings[$index]->name ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="{{ $index < 2 ? 'weapon_weight' : 'armor_weight' }}">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][weight]">
+                         name="equippings[{{ $index }}][weight]" value="{{ $character->equippings[$index]->weight ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_accuracy">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][accuracy_correction]">
+                         name="equippings[{{ $index }}][accuracy_correction]" value="{{ $character->equippings[$index]->accuracy_correction ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_power">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][power]">
+                         name="equippings[{{ $index }}][power]" value="{{ $character->equippings[$index]->power ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_avoid">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][avoid_correction]">
+                         name="equippings[{{ $index }}][avoid_correction]" value="{{ $character->equippings[$index]->avoid_correction ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_physical_defense">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][physical_defense]">
+                         name="equippings[{{ $index }}][physical_defense]" value="{{ $character->equippings[$index]->physical_defense ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_magic_defense">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][magic_defense]">
+                         name="equippings[{{ $index }}][magic_defense]" value="{{ $character->equippings[$index]->magic_defense ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_action">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][action_correction]">
+                         name="equippings[{{ $index }}][action_correction]" value="{{ $character->equippings[$index]->action_correction ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_move">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][move_correction]">
+                         name="equippings[{{ $index }}][move_correction]" value="{{ $character->equippings[$index]->move_correction ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_range">
                         <input type="number"
                          class="num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
-                         name="equippings[{{ $index }}][range]">
+                         name="equippings[{{ $index }}][range]" value="{{ $character->equippings[$index]->range ?? '' }}">
                     </td>
                     <tr>
                         <td class="px-1 pb-2 text-center" colspan="1"></td>
                         <td class="px-1 pb-2 text-center" colspan="10" id="equip_remarks">
                             <textarea rows="1"
                              class="equip_remarks border border-gray-300 rounded focus:outline-none focus:bg-white"
-                             name="equippings[{{ $index }}][remarks]" placeholder="備考"></textarea>
+                             name="equippings[{{ $index }}][remarks]" placeholder="備考">{{ $character->equippings[$index]->remarks ?? '' }}</textarea>
                         </td>
                     </tr>
                 </tr>
@@ -153,10 +153,6 @@
     width: 50%;
     float: left;
     text-align: center;
-}
-textarea {
-    font-size: 15px !important;
-    padding:  0.2rem 0.5rem 0.2rem 0.5rem !important;
 }
 </style>
 
@@ -249,4 +245,9 @@ var textareas = document.getElementsByClassName("equip_remarks");
 for (var i = 0; i < textareas.length; i++) {
     textareas[i].addEventListener("input", resize);
 }
+
+// ページ読み込み時のアクション
+window.onload = function() {
+    calculateTotals()
+};
 </script>

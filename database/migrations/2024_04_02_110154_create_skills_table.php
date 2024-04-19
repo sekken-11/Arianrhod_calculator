@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('cost')->nullable();
             $table->integer('level_limit')->default(1);
             $table->text('effect')->nullable();
+            $table->text('source')->nullable();
             $table->timestamps();
         });
     }

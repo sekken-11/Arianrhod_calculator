@@ -23,6 +23,7 @@
                 <th class="py-3 text-center">射程</th>
                 <th class="py-3 text-center">コスト</th>
                 <th class="py-3 text-center">Lv上限</th>
+                <th class="py-3 text-center">取得元</th>
             </tr>
         </thead>
         <tbody class="skills text-gray-600 text-xs font-light hover:bg-gray-200">
@@ -67,8 +68,13 @@
                      class="skill_level_limit num-input border border-gray-300 rounded focus:outline-none focus:bg-white"
                      name="skills[0][level_limit]">
                 </td>
+                <td class="p-1 pt-2 text-center">
+                    <input type="text"
+                     class="skill_source border border-gray-300 rounded focus:outline-none focus:bg-white"
+                     name="skills[0][source]">
+                </td>
                 <tr>
-                    <td class="px-1 pb-2 text-center" colspan="7">
+                    <td class="px-1 pb-2 text-center" colspan="8">
                         <textarea rows="1"
                          class="skill_effect border border-gray-300 rounded focus:outline-none focus:bg-white"
                          name="skills[0][effect]" placeholder="効果詳細"></textarea>
@@ -97,7 +103,7 @@
     width: 35px !important;
 }
 .skill_timing {
-    width: 100px !important;
+    width: 90px !important;
 }
 .skill_judge {
     width: 60px !important;
@@ -111,9 +117,8 @@
 .skill_effect {
     width: 100% !important;
 }
-textarea {
-    font-size: 15px !important;
-    padding:  0.2rem 0.5rem 0.2rem 0.5rem !important;
+.skill_source {
+    width: 90px !important;
 }
 </style>
 

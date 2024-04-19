@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('equippings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->enum('type', ['右手', '左手', '頭部', '胴部', '補助防具', '装身具']);
             $table->integer('weight')->default(0);
             $table->integer('accuracy_correction')->default(0);
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('magic_defense')->default(0);
             $table->integer('action_correction')->default(0);
             $table->integer('move_correction')->default(0);
-            $table->integer('range')->default(0);
+            $table->string('range')->default(0);
             $table->string('remarks')->nullable();
             $table->timestamps();
         });
