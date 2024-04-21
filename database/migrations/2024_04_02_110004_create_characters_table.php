@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->string('gender')->nullable();
             $table->integer('level')->default(1);
+            $table->integer('exp_point')->default(0);
+            $table->string('honor_class')->nullable();
+
             $table->integer('strength_bonus')->default(0);
             $table->integer('dexterity_bonus')->default(0);
             $table->integer('agility_bonus')->default(0);

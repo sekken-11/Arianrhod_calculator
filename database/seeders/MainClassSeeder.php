@@ -26,6 +26,8 @@ class MainClassSeeder extends Seeder
                 'luck_correction' => 0,
                 'hp_correction' => 13,
                 'mp_correction' => 10,
+                'hp_up' => '7',
+                'mp_up' => '4',
             ],
             [
                 'name' => 'アコライト',
@@ -38,6 +40,8 @@ class MainClassSeeder extends Seeder
                 'luck_correction' => 0,
                 'hp_correction' => 11,
                 'mp_correction' => 12,
+                'hp_up' => '5',
+                'mp_up' => '6',
             ],
             [
                 'name' => 'メイジ',
@@ -50,6 +54,8 @@ class MainClassSeeder extends Seeder
                 'luck_correction' => 0,
                 'hp_correction' => 10,
                 'mp_correction' => 13,
+                'hp_up' => '4',
+                'mp_up' => '7',
             ],
             [
                 'name' => 'シーフ',
@@ -62,6 +68,8 @@ class MainClassSeeder extends Seeder
                 'luck_correction' => 0,
                 'hp_correction' => 12,
                 'mp_correction' => 11,
+                'hp_up' => '6',
+                'mp_up' => '5',
             ],
         ]);
     }

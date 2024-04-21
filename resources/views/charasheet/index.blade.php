@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
         <div x-data="{ show: true }">
 
             <div class="flex justify-between">
@@ -19,7 +19,7 @@
                 </button>
             </div>
 
-            <div class="container">
+            <div>
                 <div class="bg-white shadow-md rounded my-6">
                     <table class="min-w-max w-full table-auto">
                         <thead>
@@ -35,7 +35,7 @@
                         @foreach($characters as $character)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td x-show="show" class="font-bold text-blue-500 hover:text-blue-700 py-3 px-1 text-center whitespace-nowrap">
-                                    <a href="{{ route('charasheet.edit', $character->id) }}">{{ $character->name }}</a>
+                                    <a href="{{ route('charasheet.show', $character->id) }}">{{ $character->name }}</a>
                                 </td>
                                 <td x-show="!show" class="font-bold text-blue-500 hover:text-blue-700 py-3 px-1 text-center whitespace-nowrap">
                                     <form action="{{ route('charasheet.destroy', $character->id) }}" method="POST">

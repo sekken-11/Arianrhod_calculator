@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('キャラクター') }}
+            {{ __('キャラクター編集') }}
         </h2>
     </x-slot>
 
@@ -11,8 +11,9 @@
                 <div class="p-6 text-gray-900 overflow-x-auto">
 
                     <div>
-                        <form action="{{ route('charasheet.store') }}" method="POST">
+                        <form action="{{ route('charasheet.update', $character->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <fieldset>
                                 <div class="form-group">
 
@@ -21,18 +22,23 @@
                                         <table class="min-w-max w-full table-auto">
                                             <thead>
                                                 <tr class="bg-gray-200 text-gray-600 leading-normal">
-                                                    <th class="py-3 text-center">レベル</th>
-                                                    <th class="py-3 text-center">成長点</th>
-                                                    <th class="py-3 text-center">初期メインクラス</th>
-                                                    <th class="py-3 text-center">初期サポートクラス</th>
+                                                    <th class="py-2 text-center">レベル</th>
+                                                    <th class="py-2 text-center">成長点</th>
+                                                    <th class="py-2 text-center">初期メインクラス</th>
+                                                    <th class="py-2 text-center">初期サポートクラス</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-gray-600 text-xs font-light">
                                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                                    <td class="py-3 text-center">1</td>
-                                                    <td class="py-3 text-center">5</td>
-                                                    <td class="py-3 text-center" id="initial_main_class">-</td>
-                                                    <td class="py-3 text-center" id="initial_support_class">-</td>
+                                                    <td class="py-2 text-center">{{ $character->level }}</td>
+                                                    <td class="py-2 text-center">
+                                                        <input type="number"
+                                                            class="form-control bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
+                                                            name="exp_point" id="exp_point"
+                                                            value="{{ $character->exp_point }}">
+                                                    </td>
+                                                    <td class="py-2 text-center" id="initial_main_class">-</td>
+                                                    <td class="py-2 text-center" id="initial_support_class">-</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -110,17 +116,22 @@
         font-size: 15px;
         font-weight: bold;
     }
+
+    #exp_point {
+        width: 80px;
+        background-color: white;
+    }
 </style>
 
 <script>
     // ページ読み込み時のアクション
-window.onload = function() {
-    updateStatusValues(null, {!! json_encode($tribes) !!}, 'tribe');
-    updateStatusValues(null, {!! json_encode($main_classes) !!}, 'main_class');
-    updateStatusValues(null, {!! json_encode($support_classes) !!}, 'support_class');
-    calculateAndSetMainValues();
-    setOtherTextToTwo();
-    // parts.equippingsファイルに記述
-    calculateTotals();
-};
+    window.onload = function() {
+        updateStatusValues(null, {!! json_encode($tribes) !!}, 'tribe');
+        updateStatusValues(null, {!! json_encode($main_classes) !!}, 'main_class');
+        updateStatusValues(null, {!! json_encode($support_classes) !!}, 'support_class');
+        calculateAndSetMainValues();
+        setOtherTextToTwo();
+        // parts.equippingsファイルに記述
+        calculateTotals();
+    };
 </script>

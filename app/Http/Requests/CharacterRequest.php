@@ -72,13 +72,7 @@ class CharacterRequest extends FormRequest
             'move_correction' => 0,
             'range' => 0,
         ];
-        if ($this->has('equippings')) {
-            // 装備を取得し、nameがnullでないものだけを残す
-            $equippings = $this->input('equippings');
-            $this->merge(['equippings' => collect($equippings)->reject(function ($equipping) {
-                return is_null($equipping['name']);
-            })->values()->all()]);
-            
+        if ($this->has('equippings')) {            
             $equippings = $this->input('equippings');
             foreach ($equippings as &$equip) {
                 $equippingDefaults = [
@@ -109,6 +103,7 @@ class CharacterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'player_name' => ['nullable', 'string', 'max:255'],
+            'exp_point' => ['required', 'numeric'],
             'age' => ['required', 'numeric'],
             'gender' => ['nullable', 'string'],
             'height' => ['nullable', 'numeric'],
@@ -127,9 +122,9 @@ class CharacterRequest extends FormRequest
             'main_class_id' => ['required', 'string'],
             'support_class_id' => ['required', 'string'],
 
-            'strebgth_bonus' => ['nullable', 'numeric'],
-            'strebgth_correction' => ['nullable', 'numeric'],
-            'strebgth_correction_second' => ['nullable', 'numeric'],
+            'strength_bonus' => ['nullable', 'numeric'],
+            'strength_correction' => ['nullable', 'numeric'],
+            'strength_correction_second' => ['nullable', 'numeric'],
             'dexterity_bonus' => ['nullable', 'numeric'],
             'dexterity_correction' => ['nullable', 'numeric'],
             'dexterity_correction_second' => ['nullable', 'numeric'],
@@ -158,7 +153,10 @@ class CharacterRequest extends FormRequest
             'armor_weight_correction' => ['nullable', 'numeric'],
             'item_weight_correction' => ['nullable', 'numeric'],
 
+            'remarks' => ['nullable', 'string'],
+
             'skills' => ['nullable', 'array'],
+            'skills.*.id' => ['nullable'],
             'skills.*.name' => ['required_if:skills,array', 'string', 'max:255'],
             'skills.*.level' => ['nullable', 'numeric', 'min:1'],
             'skills.*.timing' => ['nullable', 'string', 'max:255'],
@@ -168,9 +166,11 @@ class CharacterRequest extends FormRequest
             'skills.*.cost' => ['nullable', 'numeric'],
             'skills.*.level_limit' => ['nullable', 'numeric', 'min:1'],
             'skills.*.effect' => ['nullable', 'string'],
+            'skills.*.source' => ['nullable', 'string'],
 
             'equippings' => ['nullable', 'array', 'max:6'],
-            'equippings.*.name' => ['required_if:equippings,array', 'string', 'max:255'],
+            'equippings.*.id' => ['nullable'],
+            'equippings.*.name' => ['nullable', 'string', 'max:255'],
             'equippings.*.type' => ['required_if:equippings,array', 'string', 'max:255'],
             'equippings.*.weight' => ['nullable', 'numeric'],
             'equippings.*.accuracy_correction' => ['nullable', 'numeric'],
