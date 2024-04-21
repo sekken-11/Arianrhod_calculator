@@ -103,6 +103,7 @@ class CharacterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'player_name' => ['nullable', 'string', 'max:255'],
+            'exp_point' => ['required', 'numeric'],
             'age' => ['required', 'numeric'],
             'gender' => ['nullable', 'string'],
             'height' => ['nullable', 'numeric'],
@@ -121,9 +122,9 @@ class CharacterRequest extends FormRequest
             'main_class_id' => ['required', 'string'],
             'support_class_id' => ['required', 'string'],
 
-            'strebgth_bonus' => ['nullable', 'numeric'],
-            'strebgth_correction' => ['nullable', 'numeric'],
-            'strebgth_correction_second' => ['nullable', 'numeric'],
+            'strength_bonus' => ['nullable', 'numeric'],
+            'strength_correction' => ['nullable', 'numeric'],
+            'strength_correction_second' => ['nullable', 'numeric'],
             'dexterity_bonus' => ['nullable', 'numeric'],
             'dexterity_correction' => ['nullable', 'numeric'],
             'dexterity_correction_second' => ['nullable', 'numeric'],
@@ -152,7 +153,10 @@ class CharacterRequest extends FormRequest
             'armor_weight_correction' => ['nullable', 'numeric'],
             'item_weight_correction' => ['nullable', 'numeric'],
 
+            'remarks' => ['nullable', 'string'],
+
             'skills' => ['nullable', 'array'],
+            'skills.*.id' => ['nullable'],
             'skills.*.name' => ['required_if:skills,array', 'string', 'max:255'],
             'skills.*.level' => ['nullable', 'numeric', 'min:1'],
             'skills.*.timing' => ['nullable', 'string', 'max:255'],
@@ -165,6 +169,7 @@ class CharacterRequest extends FormRequest
             'skills.*.source' => ['nullable', 'string'],
 
             'equippings' => ['nullable', 'array', 'max:6'],
+            'equippings.*.id' => ['nullable'],
             'equippings.*.name' => ['nullable', 'string', 'max:255'],
             'equippings.*.type' => ['required_if:equippings,array', 'string', 'max:255'],
             'equippings.*.weight' => ['nullable', 'numeric'],

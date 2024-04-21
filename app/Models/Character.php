@@ -15,6 +15,7 @@ class Character extends Model
         'age',
         'gender',
         'level',
+        'exp_point',
         'strength_bonus',
         'dexterity_bonus',
         'agility_bonus',
@@ -61,6 +62,8 @@ class Character extends Model
         'main_class_id',
         'support_class_id',
         'user_id',
+        
+        'remarks',
     ];
 
     public function tribe() {

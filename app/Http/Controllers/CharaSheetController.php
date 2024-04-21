@@ -58,9 +58,9 @@ class CharaSheetController extends Controller
             ['jp' => '使用上限', 'en' => 'fate_limit'],
         ];
         $weight_limit = [
-            ['jp' => '武器重量', 'en' => 'weapon_weight_limit'],
-            ['jp' => '装備重量', 'en' => 'armor_weight_limit'],
-            ['jp' => '携帯品重量', 'en' => 'item_weight_limit'],
+            ['jp' => '武器重量', 'en' => 'weapon_weight'],
+            ['jp' => '装備重量', 'en' => 'armor_weight'],
+            ['jp' => '携帯品重量', 'en' => 'item_weight'],
         ];
 
         return view('charasheet.create', [
@@ -90,6 +90,7 @@ class CharaSheetController extends Controller
             $validatedData['initial_main_class'] = $mainClass->name;
             $validatedData['initial_support_class'] = $supportClass->name;
             $validatedData['level'] = 1;
+            $validatedData['exp_point'] = 0;
             $character = $user->characters()->create($validatedData);
 
             if (!empty($validatedData['skills'])) {
@@ -208,9 +209,9 @@ class CharaSheetController extends Controller
             ['jp' => '使用上限', 'en' => 'fate_limit'],
         ];
         $weight_limit = [
-            ['jp' => '武器重量', 'en' => 'weapon_weight_limit'],
-            ['jp' => '装備重量', 'en' => 'armor_weight_limit'],
-            ['jp' => '携帯品重量', 'en' => 'item_weight_limit'],
+            ['jp' => '武器重量', 'en' => 'weapon_weight'],
+            ['jp' => '装備重量', 'en' => 'armor_weight'],
+            ['jp' => '携帯品重量', 'en' => 'item_weight'],
         ];
 
         return view('charasheet.edit', [
@@ -231,8 +232,39 @@ class CharaSheetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CharacterRequest $request, $id)
     {
+        $validatedData = $request->validated();
+
+        DB::transaction(function () use ($validatedData, $id) {
+            $user = Auth::user();
+            $character = $user->characters()->findOrFail($id);
+            $character->update($validatedData);
+
+            $level = 1;
+            $count = 0;
+            $exp_point = $validatedData['exp_point'];
+            while ($exp_point >= 0) {
+                $count++;
+                $level++;
+                $exp_point -= $count * 10;
+            }
+            $level -= 1;
+            $character->update(['level' => $level]);
+
+            if (!empty($validatedData['skills'])) {
+                foreach ($validatedData['skills'] as $newSkillData) {
+                    $character->skills()->updateOrCreate(['skills.id' => $newSkillData['id']], $newSkillData);
+                }
+            }
+
+            if (!empty($validatedData['equippings'])) {
+                foreach ($validatedData['equippings'] as $newEquippingData) {
+                    $character->equippings()->updateOrCreate(['equippings.id' => $newEquippingData['id']], $newEquippingData);
+                }
+            }
+        });
+        return redirect()->route('charasheet.show', $id);
     }
 
     /**

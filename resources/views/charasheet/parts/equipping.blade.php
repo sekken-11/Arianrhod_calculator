@@ -30,7 +30,9 @@
                 <tr class="border-t border-gray-300">
                     <td class="equip_type p-1 pt-2 text-center">
                         {{ $equipping }}
+                        <!-- 隠し要素 -->
                         <input type="hidden" name="equippings[{{ $index }}][type]" value="{{ $equipping }}">
+                        <input type="hidden" name="equippings[{{ $index }}][id]" value="{{ $character->equippings[$index]->id ?? '' }}">
                     </td>
                     <td class="p-1 pt-2 text-center" id="equip_name">
                         <input type="text"
@@ -245,9 +247,4 @@ var textareas = document.getElementsByClassName("equip_remarks");
 for (var i = 0; i < textareas.length; i++) {
     textareas[i].addEventListener("input", resize);
 }
-
-// ページ読み込み時のアクション
-window.onload = function() {
-    calculateTotals()
-};
 </script>
