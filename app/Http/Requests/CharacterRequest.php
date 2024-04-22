@@ -53,6 +53,7 @@ class CharacterRequest extends FormRequest
                 $skillDefaults = [
                     'level' => 1,
                     'level_limit' => 1,
+                    'id' => 0,
                 ];
                 foreach ($skillDefaults as $key => $value) {
                     $skill[$key] = $skill[$key] ?? $value;
