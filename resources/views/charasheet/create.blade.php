@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 overflow-x-auto">
 
                     <div>
-                        <form action="{{ route('charasheet.store') }}" method="POST">
+                        <form id="charasheet_form" action="{{ route('charasheet.store') }}" method="POST">
                             @csrf
                             <fieldset>
                                 <div class="form-group">
@@ -114,13 +114,32 @@
 
 <script>
     // ページ読み込み時のアクション
-window.onload = function() {
-    updateStatusValues(null, {!! json_encode($tribes) !!}, 'tribe');
-    updateStatusValues(null, {!! json_encode($main_classes) !!}, 'main_class');
-    updateStatusValues(null, {!! json_encode($support_classes) !!}, 'support_class');
-    calculateAndSetMainValues();
-    setOtherTextToTwo();
-    // parts.equippingsファイルに記述
-    calculateTotals();
-};
+    window.onload = function() {
+        updateStatusValues(null, {!! json_encode($tribes) !!}, 'tribe');
+        updateStatusValues(null, {!! json_encode($main_classes) !!}, 'main_class');
+        updateStatusValues(null, {!! json_encode($support_classes) !!}, 'support_class');
+        calculateAndSetMainValues();
+        setOtherTextToTwo();
+        // parts.equippingsファイルに記述
+        calculateTotals();
+    };
+
+    document.getElementById('charasheet_form').addEventListener('submit', function(event) {
+    if (!validateCharasheetForm()) {
+        event.preventDefault();
+    }
+});
+
+function validateCharasheetForm() {
+    var chara_name = document.getElementById('name').value;
+    var tribe = document.getElementById('tribe').value;
+    var main_class = document.getElementById('main_class').value;
+    var support_class = document.getElementById('support_class').value;
+
+    if (chara_name == '' || tribe == '' || main_class == '' || support_class == '') {
+        alert('必須項目が入力されていません');
+        return false;
+    }
+    return true;
+}
 </script>

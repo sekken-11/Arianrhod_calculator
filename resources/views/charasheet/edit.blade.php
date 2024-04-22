@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 overflow-x-auto">
 
                     <div>
-                        <form action="{{ route('charasheet.update', $character->id) }}" method="POST">
+                        <form id="charasheet_form" action="{{ route('charasheet.update', $character->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <fieldset>
