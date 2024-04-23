@@ -253,9 +253,13 @@ class CharaSheetController extends Controller
             $character->update(['level' => $level]);
 
             if (!empty($validatedData['skills'])) {
+                $newSkillIds = collect($validatedData['skills'])->pluck('id')->all();
+                $character->skills()->whereNotIn('skills.id', $newSkillIds)->delete();
                 foreach ($validatedData['skills'] as $newSkillData) {
                     $character->skills()->updateOrCreate(['skills.id' => $newSkillData['id']], $newSkillData);
                 }
+            } else {
+                $character->skills()->delete();
             }
 
             if (!empty($validatedData['equippings'])) {

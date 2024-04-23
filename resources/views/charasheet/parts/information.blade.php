@@ -3,7 +3,7 @@
     <!-- キャラクター名・プレイヤー名 -->
     <div class="w-full w-1/2 px-2">
         <div class="my-2">
-            <label for="name" class="font-bold mb-1">{{ __('キャラクター名') }}</label>
+            <label for="name" class="font-bold mb-1">{{ __('キャラクター名') }}<span class="text-red-500">（必須項目）</span></label>
             <input type="text" class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
              name="name" id="name" value="{{ $character->name ?? '' }}">
         </div>

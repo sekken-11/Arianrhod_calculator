@@ -12,7 +12,7 @@
     <table class="remarks_fields min-w-max w-full table-auto">
         <thead>
         </thead>
-        <tbody class="skills text-gray-600 text-xs font-light hover:bg-gray-200">
+        <tbody class="text-gray-600 text-xs font-light hover:bg-gray-200">
             <tr class="border-t border-gray-300">
                 <td class="p-2 text-center">
                     <textarea type="text"

@@ -10,9 +10,9 @@
         <div x-data="{ show: true }">
 
             <div class="flex justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fucus:outline-none focus:shadow-outline mt-3">
-                    <a href="{{ route('charasheet.create') }}">新規作成</a>
-                </button>
+                <a href="{{ route('charasheet.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fucus:outline-none focus:shadow-outline mt-3 block text-center">
+                    新規作成
+                </a>
                 <button @click="show = !show"  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded fucus:outline-none focus:shadow-outline mt-3">
                     <span x-show="show">削除モード</span>
                     <span x-show="!show">削除モード中</span>
@@ -25,6 +25,7 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
                                 <th class="py-3 px-1 text-center">キャラクター名</th>
+                                <th class="py-3 px-1 text-center">Lv</th>
                                 <th class="py-3 px-1 text-center">プレイヤー名</th>
                                 <th class="py-3 px-1 text-center">種族</th>
                                 <th class="py-3 px-1 text-center">メインクラス</th>
@@ -44,6 +45,7 @@
                                         <button type="submit" onclick="return confirm('削除してもよろしいですか？')" class="text-red-500 hover:text-red-700">{{ $character->name }}(削除)</button>
                                     </form>
                                 </td>
+                                <td class="py-3 px-1 text-center whitespace-nowrap">{{ $character->level }}</td>
                                 <td class="py-3 px-1 text-center whitespace-nowrap">{{ $character->player_name }}</td>
                                 <td class="py-3 px-1 text-center whitespace-nowrap">{{ $character->tribe->name }}</td>
                                 <td class="py-3 px-1 text-center whitespace-nowrap">{{ $character->main_class->name }}</td>

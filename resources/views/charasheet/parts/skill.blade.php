@@ -26,7 +26,7 @@
                 <th class="py-3 text-center">取得元</th>
             </tr>
         </thead>
-        @if (isset($character))
+        @if (isset($character) && count($character->skills) != 0 )
         @foreach ($character->skills as $index => $skill)
         <tbody class="skills text-gray-600 text-xs font-light hover:bg-gray-200">
             <tr class="border-t border-gray-300">
@@ -34,8 +34,6 @@
                     <input type="text"
                      class="skill_name border border-gray-300 rounded focus:outline-none focus:bg-white"
                      name="skills[{{ $index }}][name]" placeholder="スキル名" value="{{ $skill->name }}">
-                    <!-- 隠し要素 -->
-                    <input type="hidden" name="skills[{{ $index }}][id]" value="{{ $skill->id ?? '' }}">
                 </td>
                 <td class="p-1 pt-2 text-center">
                     <input type="number"
@@ -82,6 +80,8 @@
                         <textarea rows="1"
                          class="skill_effect border border-gray-300 rounded focus:outline-none focus:bg-white"
                          name="skills[{{ $index }}][effect]" placeholder="効果詳細">{{ $skill->effect }}</textarea>
+                         <!-- 隠し要素 -->
+                        <input type="hidden" name="skills[{{ $index }}][id]" value="{{ $skill->id }}">
                     </td>
                     <td class="px-1 pb-2 text-center" colspan="1">
                         <button type="button" onclick="removeSkillField(this)">削除</button>
@@ -199,7 +199,7 @@ function addSkillField() {
     var newRow = skillRow.cloneNode(true);
     skillsContainer.append(newRow);
 
-    var skillsColumnName = ['name', 'level', 'timing', 'judge', 'target', 'range', 'cost', 'level_limit', 'effect'];
+    var skillsColumnName = ['name', 'level', 'timing', 'judge', 'target', 'range', 'cost', 'level_limit', 'source', 'effect', 'id'];
     var skillRows = document.querySelectorAll('.text-gray-600.text-xs.font-light.skills');
     skillRows.forEach((skill, skillIndex) => {
         var inputs = skill.querySelectorAll('input, textarea');

@@ -13,8 +13,8 @@ class CharacterRequest extends FormRequest
             'strength_bonus' => $this->strength_bonus ?? 0,
             'dexterity_bonus' => $this->dexterity_bonus ?? 0,
             'agility_bonus' => $this->agility_bonus ?? 0,
-            'strebgth_correction' => $this->strebgth_correction ?? 0,
-            'strebgth_correction_second' => $this->strebgth_correction_second ?? 0,
+            'strength_correction' => $this->strength_correction ?? 0,
+            'strength_correction_second' => $this->strength_correction_second ?? 0,
             'dexterity_correction' => $this->dexterity_correction ?? 0,
             'dexterity_correction_second' => $this->dexterity_correction_second ?? 0,
             'agility_correction' => $this->agility_correction ?? 0,
@@ -53,6 +53,7 @@ class CharacterRequest extends FormRequest
                 $skillDefaults = [
                     'level' => 1,
                     'level_limit' => 1,
+                    'id' => 0,
                 ];
                 foreach ($skillDefaults as $key => $value) {
                     $skill[$key] = $skill[$key] ?? $value;
@@ -103,8 +104,8 @@ class CharacterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'player_name' => ['nullable', 'string', 'max:255'],
-            'exp_point' => ['required', 'numeric'],
-            'age' => ['required', 'numeric'],
+            'exp_point' => ['nullable', 'numeric'],
+            'age' => ['nullable', 'numeric'],
             'gender' => ['nullable', 'string'],
             'height' => ['nullable', 'numeric'],
             'hair_color' => ['nullable', 'string'],

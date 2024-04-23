@@ -2,7 +2,7 @@
 <div class="flex flex-wrap">
     <div class="w-full w-1/3 px-2">
         <div class="my-2">
-            <label for="tribe" class="font-bold mb-1">{{ __('種族') }}</label>
+            <label for="tribe" class="font-bold mb-1">{{ __('種族') }}<span class="text-red-500">（必須項目）</span></label>
             <select
                 class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                 name="tribe_id" id="tribe">
@@ -17,7 +17,7 @@
     </div>
     <div class="w-full w-1/3 px-2">
         <div class="my-2">
-            <label for="main_class" class="font-bold mb-1">{{ __('メインクラス') }}</label>
+            <label for="main_class" class="font-bold mb-1">{{ __('メインクラス') }}<span class="text-red-500">（必須項目）</span></label>
             <select
                 class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                 name="main_class_id" id="main_class">
@@ -33,7 +33,7 @@
     </div>
     <div class="w-full w-1/3 px-2">
         <div class="my-2">
-            <label for="support_class" class="font-bold mb-1">{{ __('サポートクラス') }}</label>
+            <label for="support_class" class="font-bold mb-1">{{ __('サポートクラス') }}<span class="text-red-500">（必須項目）</span></label>
             <select
                 class="form-control block w-full bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white"
                 name="support_class_id" id="support_class">
