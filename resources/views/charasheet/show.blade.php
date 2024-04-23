@@ -8,16 +8,8 @@
     <div class="py-12">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div x-data="{ show: true }">
-
-                <div class="flex justify-between">
-                    <button
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fucus:outline-none focus:shadow-outline mt-3">
-                        <a href="{{ route('charasheet.edit', $character->id) }}">編集</a>
-                    </button>
-                </div>
-
                 <div>
-                    <div class="chara_name_box shadow-lg my-6 py-2 flex flex-wrap">
+                    <div class="chara_name_box shadow-lg mb-4 py-2 flex flex-wrap">
                         <div class="w-3/4">
                             <span class="chara_name">{{ $character->name }}</span>
                             <span>の詳細</span>
@@ -29,11 +21,20 @@
                         </div>
                     </div>
 
+                    <div class="flex justify-between mb-4">
+                        <a href="{{ route('charasheet.edit', $character->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fucus:outline-none focus:shadow-outline block text-center">
+                            編集
+                        </a>
+                        <a href="{{ route('charasheet.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded fucus:outline-none focus:shadow-outline block text-center">
+                            一覧に戻る
+                        </a>
+                    </div>
+
                     <!-- １段目 -->
                     <div class="flex flex-wrap">
                         <!-- キャラクターステータス -->
-                        <div class="w-full xl:w-1/2 xl:pe-2 mb-3">
-                            <div class="bg-white shadow-md rounded">
+                        <div class="w-full xl:w-1/2 xl:pe-3">
+                            <div class="bg-white shadow-md rounded mb-4">
                                 <table class="min-w-max w-full table-auto">
                                     <thead>
                                         <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
@@ -173,10 +174,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        <!-- キャラクター設定 -->
-                        <div class="w-full xl:w-1/2 xl:ps-2 mb-3">
-                            <div class="bg-white shadow-md rounded">
+                            <!-- キャラクター設定 -->
+                            <div class="bg-white shadow-md rounded mb-4">
                                 <table class="min-w-max w-full table-auto">
                                     <thead>
                                         <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
@@ -259,13 +258,52 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 2段目 -->
-                    <div class="flex flex-wrap">
-                        <!-- スキル一覧 -->
-                        <div class="w-full xl:w-1/2 xl:pe-2 mb-3">
-                            <div class="bg-white shadow-md rounded">
+                        <div class="w-full xl:w-1/2 xl:ps-3 mb-4">
+                            <!-- 装備一覧 -->
+                            <div class="bg-white shadow-md rounded mb-4">
+                                <table class="min-w-max w-full table-auto">
+                                    <thead>
+                                        <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
+                                            <th class="table_title py-2 text-center" colspan="11">装備一覧</th>
+                                        </tr>
+                                        <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
+                                            @foreach ($equip_status as $equip)
+                                            <th class="mini_status_title equip_{{ $equip['en'] }} py-1 text-center">{{
+                                                $equip['jp'] }}</th>
+                                            @endforeach
+                                        </tr>
+                                    </thead>
+                                    @foreach ($character->equippings as $equipping)
+                                    <tbody class="text-gray-600 text-xs font-light">
+                                        <tr class="border-b border-gray-100">
+                                            @foreach ($equip_status as $equip)
+                                            <td class="py-1 text-center equip_part_{{ $equip['en'] }}">
+                                                @if ($equipping->{$equip['en']})
+                                                {{ $equipping->{$equip['en']} }}
+                                                @else
+                                                -
+                                                @endif
+                                            </td>
+                                            @endforeach
+                                        </tr>
+                                        <tr class="border-b border-blue-300">
+                                            <td class="py-2 text-center bg-gray-100" colspan="1">
+                                                </tf>
+                                            <td class="py-1 px-2" colspan="10">
+                                                @if ($equipping->remarks)
+                                                <span class="break-first">{{ $equipping->remarks }}</span>
+                                                @else
+                                                -
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    @endforeach
+                                </table>
+                            </div>
+                            <!-- スキル一覧 -->
+                            <div class="bg-white shadow-md rounded mb-4">
                                 <table class="min-w-max w-full table-auto">
                                     <thead>
                                         <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
@@ -284,10 +322,10 @@
                                     @foreach ($character->skills as $skill)
                                     <tbody class="text-gray-600 text-xs font-light">
                                         <tr class="border-b border-gray-100">
-                                            @foreach ($skill_status as $skill_name)
-                                            <td class="py-2 text-center">
-                                                @if ($skill->{$skill_name['en']})
-                                                {{ $skill->{$skill_name['en']} }}
+                                            @foreach ($skill_status as $skill_status_name)
+                                            <td class="py-1 text-center skill_{{ $skill_status_name['en'] }}">
+                                                @if ($skill->{$skill_status_name['en']})
+                                                {{ $skill->{$skill_status_name['en']} }}
                                                 @else
                                                 -
                                                 @endif
@@ -317,54 +355,8 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- 装備一覧 -->
-                        <div class="w-full xl:w-1/2 xl:pe-2 mb-3">
-                            <div class="bg-white shadow-md rounded">
-                                <table class="min-w-max w-full table-auto">
-                                    <thead>
-                                        <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
-                                            <th class="table_title py-2 text-center" colspan="11">装備一覧</th>
-                                        </tr>
-                                        <tr class="bg-gray-200 text-gray-600 text-xs leading-normal">
-                                            @foreach ($equip_status as $equip)
-                                            <th class="mini_status_title equip_{{ $equip['en'] }} py-1 text-center">{{
-                                                $equip['jp'] }}</th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    @foreach ($character->equippings as $equipping)
-                                    <tbody class="text-gray-600 text-xs font-light">
-                                        <tr class="border-b border-gray-100">
-                                            @foreach ($equip_status as $equip)
-                                            <td class="py-2 text-center equip_part_{{ $equip['en'] }}">
-                                                @if ($equipping->{$equip['en']})
-                                                {{ $equipping->{$equip['en']} }}
-                                                @else
-                                                -
-                                                @endif
-                                            </td>
-                                            @endforeach
-                                        </tr>
-                                        <tr class="border-b border-blue-300">
-                                            <td class="py-2 text-center bg-gray-100" colspan="1">
-                                                </tf>
-                                            <td class="py-1 px-2" colspan="10">
-                                                @if ($equipping->remarks)
-                                                <span class="break-first">{{ $equipping->remarks }}</span>
-                                                @else
-                                                -
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    @endforeach
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
+                    </div>  
                 </div>
-
             </div>
         </div>
     </div>
@@ -421,11 +413,11 @@
         width: 150px;
     }
 
-    .skill_name {
-        width: 200px;
-    }
-
     .vertical-align-top {
         vertical-align: top;
+    }
+
+    .skill_name {
+        font-weight: bold;
     }
 </style>
