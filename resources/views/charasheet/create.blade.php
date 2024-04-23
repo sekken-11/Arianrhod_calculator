@@ -125,21 +125,21 @@
     };
 
     document.getElementById('charasheet_form').addEventListener('submit', function(event) {
-    if (!validateCharasheetForm()) {
-        event.preventDefault();
-    }
-});
+        if (!validateCharasheetForm()) {
+            event.preventDefault();
+        }
+    });
 
-function validateCharasheetForm() {
-    var chara_name = document.getElementById('name').value;
-    var tribe = document.getElementById('tribe').value;
-    var main_class = document.getElementById('main_class').value;
-    var support_class = document.getElementById('support_class').value;
+    function validateCharasheetForm() {
+        var chara_name = document.getElementById('name').value;
+        var tribe = document.getElementById('tribe').value;
+        var main_class = document.getElementById('main_class').value;
+        var support_class = document.getElementById('support_class').value;
 
-    if (chara_name == '' || tribe == '' || main_class == '' || support_class == '') {
-        alert('必須項目が入力されていません');
-        return false;
+        if (chara_name == '' || tribe == '' || main_class == '' || support_class == '') {
+            alert('必須項目が入力されていません');
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 </script>
