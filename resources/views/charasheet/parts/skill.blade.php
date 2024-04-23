@@ -26,7 +26,7 @@
                 <th class="py-3 text-center">取得元</th>
             </tr>
         </thead>
-        @if (isset($character))
+        @if (isset($character) && count($character->skills) != 0 )
         @foreach ($character->skills as $index => $skill)
         <tbody class="skills text-gray-600 text-xs font-light hover:bg-gray-200">
             <tr class="border-t border-gray-300">
